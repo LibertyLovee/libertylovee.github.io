@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liberty BIO ❄️</title>
+    <title>Liberty BIO ✨</title>
     <style>
         * {
             margin: 0;
@@ -14,17 +14,17 @@
         body {
             min-height: 100vh;
             background: #0a0a0a;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 16px;
             position: relative;
             overflow-x: hidden;
         }
 
-        /* ===== СНЕГ (ТОЧКИ) ===== */
+        /* ===== СНЕГ (ОПТИМИЗИРОВАН) ===== */
         #snow-container {
             position: fixed;
             top: 0;
@@ -33,45 +33,47 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
+            will-change: transform;
         }
 
         .snow-particle {
             position: absolute;
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.8);
             border-radius: 50%;
             animation: snowfall linear infinite;
+            will-change: transform, opacity;
         }
 
         @keyframes snowfall {
             0% {
                 transform: translateY(-10vh) translateX(0);
-                opacity: 0.6;
+                opacity: 0.7;
             }
             100% {
-                transform: translateY(100vh) translateX(20px);
-                opacity: 0.2;
+                transform: translateY(100vh) translateX(15px);
+                opacity: 0.1;
             }
         }
 
         /* ===== ЗАГОЛОВОК ===== */
         .main-title {
-            font-size: clamp(2rem, 8vw, 3rem);
+            font-size: clamp(2rem, 7vw, 2.8rem);
             font-weight: 300;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             z-index: 3;
             position: relative;
             color: #c9b6ff;
-            text-shadow: 0 0 20px rgba(201, 182, 255, 0.5);
-            letter-spacing: 4px;
-            animation: glow 3s ease-in-out infinite;
-            padding: 0 10px;
+            text-shadow: 0 0 15px rgba(201, 182, 255, 0.6);
+            letter-spacing: 3px;
+            animation: titleGlow 3s ease-in-out infinite;
+            padding: 0 8px;
             word-break: break-word;
         }
 
-        @keyframes glow {
-            0%, 100% { text-shadow: 0 0 20px rgba(201, 182, 255, 0.5); }
-            50% { text-shadow: 0 0 40px rgba(201, 182, 255, 0.8); }
+        @keyframes titleGlow {
+            0%, 100% { text-shadow: 0 0 15px rgba(201, 182, 255, 0.5); }
+            50% { text-shadow: 0 0 30px rgba(201, 182, 255, 0.9); }
         }
 
         /* ===== СТЕКЛЯННЫЙ КОНТЕЙНЕР ===== */
@@ -79,70 +81,80 @@
             position: relative;
             z-index: 2;
             width: 100%;
-            max-width: 800px;
+            max-width: 750px;
             margin: 0 auto;
         }
 
         .liquid-glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            animation: liquidMove 10s ease-in-out infinite;
-            padding: clamp(20px, 5vw, 40px);
+            background: rgba(20, 15, 30, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 35px;
+            border: 1px solid rgba(201, 182, 255, 0.15);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            animation: liquidMove 12s ease-in-out infinite;
+            padding: clamp(18px, 4vw, 35px);
             width: 100%;
-            transition: all 0.3s ease;
         }
 
         @keyframes liquidMove {
-            0%, 100% { border-radius: 40% 60% 30% 70% / 50% 40% 60% 50%; }
-            33% { border-radius: 60% 40% 70% 30% / 40% 60% 40% 60%; }
-            66% { border-radius: 30% 70% 40% 60% / 60% 30% 70% 40%; }
+            0%, 100% { border-radius: 40% 60% 35% 65% / 45% 40% 60% 55%; }
+            33% { border-radius: 55% 45% 60% 40% / 35% 55% 45% 65%; }
+            66% { border-radius: 35% 65% 45% 55% / 55% 35% 65% 45%; }
         }
 
-        /* ===== ТЕКСТ ВНУТРИ ===== */
+        /* ===== ТЕКСТ (ТЕПЕРЬ ТОЖЕ ФИОЛЕТОВЫЙ И СВЕТИТСЯ) ===== */
         .glass-content {
             text-align: left;
             word-wrap: break-word;
             white-space: pre-wrap;
-            font-size: clamp(0.9rem, 4vw, 1.1rem);
+            font-size: clamp(0.9rem, 3.8vw, 1.1rem);
             line-height: 1.7;
-            color: rgba(255, 255, 255, 0.95);
+            color: #c9b6ff; /* Тот же цвет, что у заголовка */
             font-weight: 300;
             letter-spacing: 0.3px;
+            text-shadow: 0 0 8px rgba(201, 182, 255, 0.4);
+            animation: textGlow 4s ease-in-out infinite;
         }
 
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 0 0 5px rgba(201, 182, 255, 0.3); }
+            50% { text-shadow: 0 0 15px rgba(201, 182, 255, 0.6); }
+        }
+
+        /* Ссылки внутри текста — чуть ярче */
         .glass-content a {
-            color: #c9b6ff;
+            color: #d4c0ff;
             text-decoration: none;
-            border-bottom: 1px solid rgba(201, 182, 255, 0.3);
-            transition: border-color 0.2s;
+            border-bottom: 1px solid rgba(201, 182, 255, 0.4);
+            transition: all 0.2s ease;
+            text-shadow: 0 0 8px rgba(201, 182, 255, 0.6);
         }
 
         .glass-content a:hover {
             border-bottom-color: #c9b6ff;
+            text-shadow: 0 0 12px rgba(201, 182, 255, 0.9);
         }
 
-        /* ===== РАЗДЕЛИТЕЛИ ===== */
+        /* Разделители */
         .separator {
-            color: #c9b6ff;
-            opacity: 0.5;
-            margin: 10px 0;
-            font-size: 1.2rem;
+            color: #a58bd4;
+            opacity: 0.6;
+            margin: 8px 0;
+            font-size: 1.1rem;
+            text-shadow: 0 0 5px rgba(165, 139, 212, 0.4);
         }
 
-        /* ===== БЛИК ===== */
+        /* Блик на стекле */
         .reflection {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 30%;
+            height: 25%;
             background: linear-gradient(135deg, 
-                rgba(255,255,255,0.1) 0%, 
-                rgba(255,255,255,0) 100%);
+                rgba(201, 182, 255, 0.1) 0%, 
+                rgba(201, 182, 255, 0) 100%);
             border-radius: inherit;
             pointer-events: none;
         }
@@ -150,13 +162,13 @@
 </head>
 <body>
 
-    <!-- КОНТЕЙНЕР ДЛЯ СНЕГА -->
+    <!-- СНЕГ -->
     <div id="snow-container"></div>
 
     <!-- ЗАГОЛОВОК -->
     <h1 class="main-title">BIO LIBERTY LOVE</h1>
 
-    <!-- ОСНОВНОЙ БЛОК С ТЕКСТОМ -->
+    <!-- ОСНОВНОЙ БЛОК -->
     <div class="glass-container">
         <div class="liquid-glass">
             <div class="reflection"></div>
@@ -196,19 +208,19 @@ My Favorite Playlist- Project_3_2, Brian is the Most Beautiful, morning tape, Hi
     </div>
 
     <script>
-        // СОЗДАЁМ СНЕГ ИЗ ТОЧЕК
-        (function createSnow() {
+        // ОПТИМИЗИРОВАННЫЙ СНЕГ (20 снежинок, очень плавно)
+        (function() {
             const container = document.getElementById('snow-container');
             if (!container) return;
             
-            // Оптимальное количество снежинок для телефона
-            const count = 30; 
+            // Меньше снежинок = плавнее на телефоне
+            const count = 20; 
 
             for (let i = 0; i < count; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'snow-particle';
                 
-                // Размер точки (2-6 пикселей)
+                // Размер
                 const size = Math.random() * 5 + 2;
                 particle.style.width = size + 'px';
                 particle.style.height = size + 'px';
@@ -216,10 +228,10 @@ My Favorite Playlist- Project_3_2, Brian is the Most Beautiful, morning tape, Hi
                 // Позиция
                 particle.style.left = Math.random() * 100 + '%';
                 
-                // Скорость падения (8-18 секунд)
-                particle.style.animationDuration = (Math.random() * 10 + 8) + 's';
+                // Длительность (медленно)
+                particle.style.animationDuration = (Math.random() * 12 + 10) + 's';
                 
-                // Задержка старта
+                // Задержка
                 particle.style.animationDelay = Math.random() * 10 + 's';
                 
                 // Прозрачность
