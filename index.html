@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liberty BIO</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            min-height: 100vh;
+            background: #0a0a0a;
+            font-family: system-ui, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        #snow-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .snow-particle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            from { transform: translateY(-10vh); }
+            to { transform: translateY(100vh); }
+        }
+        .main-title {
+            font-size: 2.5rem;
+            color: #c9b6ff;
+            text-align: center;
+            margin-bottom: 30px;
+            z-index: 3;
+            position: relative;
+            text-shadow: 0 0 20px #c9b6ff;
+        }
+        .glass-container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 700px;
+        }
+        .liquid-glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border-radius: 40px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+            animation: liquidMove 10s ease infinite;
+        }
+        @keyframes liquidMove {
+            0%,100% { border-radius: 40% 60% 30% 70% / 50% 40% 60% 50%; }
+            50% { border-radius: 60% 40% 70% 30% / 40% 60% 40% 60%; }
+        }
+        .glass-content {
+            color: white;
+            font-size: 1rem;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+        a {
+            color: #c9b6ff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="snow-container"></div>
+    <h1 class="main-title">BIO LIBERTY LOVE</h1>
+    <div class="glass-container">
+        <div class="liquid-glass">
+            <div class="glass-content">
+BIO DEDUSSSC 🖤🖤🖤🥀🥀🥀Liberty Looooove 🖤
+————————
+NAME-🥀🖤Liberty🖤🥀
+————————
+WEB SITE- —
+————————
+MANAGER- —
+————————
+FAVORITE MUSIC- апфс-давай поправимся, апфс-зажечь кровать, апфс-мама я сияю,
+————————
+The best bro- @D3folt
+————————
+favorite game- DDnet-Ddrace network, bandy and the ink machine, Alice madness returns, sally face, steep
+————————
+Favorite emoji pack— https://t.me/addemoji/blackrandom
+————————
+country- Russia
+————————
+City- Rostov region 
+—————————
+Favorite music group- АпФс±TV Girl
+————————
+My sticker pack- https://t.me/addstickers/EHshchEhshchEhshchEhshchkere8
+————————
+Location- планета земля
+————————
+Hobby- Программирование
+————————
+My Favorite Playlist- Project_3_2, Brian is the Most Beautiful, morning tape, Hit-#2, Save The world We Are Not Friends Nextime, Туда сюда Alex Ricellow, we fell in love in October, Crystal of faded Childhood (урезанная версия), dj trippie flameboy-B0lit, dj trippie flameboy-свидание на кладбище, 5mewmet-disklejmer, 5mewmet-это называется любовь, apfs golaya krasuvaya, dj trippie flameboy-20 таблеток💊, apfs Af, apfs lv, apfs зажечь кровать, apfs Devochka, кишлак ya nekrasivy, русалочье урочище-всё забрал, апфс-давай поправимся, апфс-мама я сияю, апфс-сонный паралич, Эмо — Кишлак
+————————
+            </div>
+        </div>
+    </div>
+    <script>
+        (function() {
+            const container = document.getElementById('snow-container');
+            for (let i = 0; i < 30; i++) {
+                const p = document.createElement('div');
+                p.className = 'snow-particle';
+                p.style.width = (Math.random() * 5 + 2) + 'px';
+                p.style.height = p.style.width;
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDuration = (Math.random() * 10 + 8) + 's';
+                p.style.animationDelay = Math.random() * 10 + 's';
+                p.style.opacity = Math.random() * 0.5 + 0.2;
+                container.appendChild(p);
+            }
+        })();
+    </script>
+</body>
+</html>
