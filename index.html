@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liberty · Мягкие звёздочки</title>
+    <title>Liberty · Мягкие звёздочки [6 звёзд] + FAQ</title>
     <style>
         * {
             margin: 0;
@@ -167,13 +167,22 @@
             }
         }
 
+        /* Контейнер для заголовка и кнопки FAQ */
+        .title-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            z-index: 3;
+            position: relative;
+        }
+
         .main-title {
             font-size: clamp(2rem, 8vw, 3rem);
             font-weight: 300;
             text-align: center;
-            margin-bottom: 30px;
-            z-index: 3;
-            position: relative;
             letter-spacing: 4px;
             animation: titleGlow 3s ease-in-out infinite;
             padding: 0 10px;
@@ -204,6 +213,36 @@
         @keyframes titleGlowLight {
             0%, 100% { text-shadow: 0 0 20px rgba(90, 75, 122, 0.3); }
             50% { text-shadow: 0 0 40px rgba(90, 75, 122, 0.5); }
+        }
+
+        /* КНОПКА FAQ (НОВОЕ) */
+        .faq-button {
+            background: rgba(201, 182, 255, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(201, 182, 255, 0.3);
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-size: 1.1rem;
+            color: #c9b6ff;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            opacity: 0;
+            transition: opacity 1s ease, transform 0.2s ease;
+            white-space: nowrap;
+            text-shadow: 0 0 10px rgba(201, 182, 255, 0.3);
+        }
+
+        body.light .faq-button {
+            color: #5a4b7a;
+            border-color: rgba(90, 75, 122, 0.3);
+            background: rgba(90, 75, 122, 0.1);
+            text-shadow: 0 0 10px rgba(90, 75, 122, 0.2);
+        }
+
+        .faq-button:hover {
+            transform: scale(1.05);
+            background: rgba(201, 182, 255, 0.25);
         }
 
         .glass-container {
@@ -482,6 +521,159 @@
         body.light .sun-moon {
             transform: rotate(180deg);
         }
+
+        /* ===== FAQ OVERLAY (НОВОЕ) ===== */
+        .faq-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .faq-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* FAQ окно в стиле liquid-glass */
+        .faq-window {
+            background: rgba(20, 20, 30, 0.2);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 40px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5);
+            animation: windowAppear 0.4s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.light .faq-window {
+            background: rgba(240, 240, 255, 0.3);
+            border: 1px solid rgba(90, 75, 122, 0.2);
+        }
+
+        .faq-window::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.15) 0%, 
+                rgba(255, 255, 255, 0) 80%);
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes windowAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Текст в FAQ окне */
+        .faq-text {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            min-height: 200px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        body.light .faq-text {
+            color: #2a2a2a;
+        }
+
+        .word {
+            display: inline-block;
+            margin-right: 5px;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: wordAppear 0.3s ease forwards;
+        }
+
+        @keyframes wordAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Кнопка выйти */
+        .faq-exit {
+            background: rgba(201, 182, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(201, 182, 255, 0.3);
+            border-radius: 40px;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            color: #c9b6ff;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 30px;
+            text-align: center;
+            display: inline-block;
+            opacity: 0;
+            animation: buttonAppear 0.5s ease 6s forwards;
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: auto;
+        }
+
+        body.light .faq-exit {
+            color: #5a4b7a;
+            border-color: rgba(90, 75, 122, 0.3);
+            background: rgba(90, 75, 122, 0.1);
+        }
+
+        @keyframes buttonAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .faq-exit:hover {
+            transform: scale(1.05);
+            background: rgba(201, 182, 255, 0.3);
+        }
+
+        .faq-exit:active {
+            transform: scale(0.95);
+        }
     </style>
 </head>
 <body class="dark">
@@ -495,7 +687,13 @@
     <div class="theme-toggle" id="themeToggle">
         <div class="sun-moon"></div>
     </div>
-    <h1 class="main-title" id="mainTitle">BIO LIBERTY LOVE</h1>
+    
+    <!-- Контейнер для заголовка и кнопки FAQ -->
+    <div class="title-container">
+        <h1 class="main-title" id="mainTitle">BIO LIBERTY LOVE</h1>
+        <div class="faq-button" id="faqButton">FAQ</div>
+    </div>
+    
     <div class="glass-container" id="glassContainer">
         <div class="liquid-glass">
             <div class="reflection"></div>
@@ -531,6 +729,14 @@ Hobby- Программирование
 My Favorite Playlist- Project_3_2, Brian is the Most Beautiful, morning tape, Hit-#2, Save The world We Are Not Friends Nextime, Туда сюда Alex Ricellow, we fell in love in October, Crystal of faded Childhood (урезанная версия), dj trippie flameboy-B0lit, dj trippie flameboy-свидание на кладбище, 5mewmet-disklejmer, 5mewmet-это называется любовь, apfs golaya krasuvaya, dj trippie flameboy-20 таблеток💊, apfs Af, apfs lv, apfs зажечь кровать, apfs Devochka, кишлак ya nekrasivy, русалочье урочище-всё забрал, апфс-давай поправимся, апфс-мама я сияю, апфс-сонный паралич, Эмо — Кишлак
 ————————
             </div>
+        </div>
+    </div>
+
+    <!-- FAQ OVERLAY (НОВОЕ) -->
+    <div class="faq-overlay" id="faqOverlay">
+        <div class="faq-window">
+            <div class="faq-text" id="faqText"></div>
+            <div class="faq-exit" id="faqExit">Выйти <3</div>
         </div>
     </div>
 
@@ -591,6 +797,7 @@ My Favorite Playlist- Project_3_2, Brian is the Most Beautiful, morning tape, Hi
             const glassContainer = document.getElementById('glassContainer');
             const clickButton = document.getElementById('clickButton');
             const themeToggleBtn = document.getElementById('themeToggle');
+            const faqButton = document.querySelector('.faq-button');
             
             setTimeout(function() {
                 welcomeContainer.classList.add('fade-out');
@@ -603,6 +810,7 @@ My Favorite Playlist- Project_3_2, Brian is the Most Beautiful, morning tape, Hi
                         glassContainer.style.opacity = '1';
                         clickButton.style.opacity = '1';
                         themeToggleBtn.style.opacity = '1';
+                        if (faqButton) faqButton.style.opacity = '1';
                         
                         setTimeout(function() {
                             welcomeContainer.style.display = 'none';
@@ -626,7 +834,7 @@ My Favorite Playlist- Project_3_2, Brian is the Most Beautiful, morning tape, Hi
             const centerX = buttonRect.left + buttonRect.width / 2;
             const centerY = buttonRect.top + buttonRect.height / 2;
             
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < 6; i++) {
                 setTimeout(() => {
                     const star = document.createElement('div');
                     star.className = 'star-particle';
@@ -662,6 +870,45 @@ My Favorite Playlist- Project_3_2, Brian is the Most Beautiful, morning tape, Hi
         }
 
         clickButton.addEventListener('click', createStars);
+
+        // FAQ функционал (НОВОЕ)
+        const faqButton = document.getElementById('faqButton');
+        const faqOverlay = document.getElementById('faqOverlay');
+        const faqText = document.getElementById('faqText');
+        const faqExit = document.getElementById('faqExit');
+
+        const fullText = "зачем этот сайт? Это моё био, и всё в принципе, мне было скучно и я решил с нуля сделать сайт :3, позже я сюда возможно запихну свой проектик <3, спасибо что посетил(а) сайт, пака :3";
+        const words = fullText.split(' ');
+
+        faqButton.addEventListener('click', () => {
+            faqOverlay.classList.add('active');
+            faqText.innerHTML = '';
+            
+            words.forEach((word, index) => {
+                setTimeout(() => {
+                    const span = document.createElement('span');
+                    span.className = 'word';
+                    span.textContent = word + ' ';
+                    faqText.appendChild(span);
+                }, index * 120);
+            });
+        });
+
+        faqExit.addEventListener('click', () => {
+            faqOverlay.classList.remove('active');
+            setTimeout(() => {
+                faqText.innerHTML = '';
+            }, 300);
+        });
+
+        faqOverlay.addEventListener('click', (e) => {
+            if (e.target === faqOverlay) {
+                faqOverlay.classList.remove('active');
+                setTimeout(() => {
+                    faqText.innerHTML = '';
+                }, 300);
+            }
+        });
     </script>
 </body>
-</html>
+    </html>
